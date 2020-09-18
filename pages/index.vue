@@ -9,38 +9,7 @@ v-layout(
         sm8
         md6
     )
-        .text-center
-            logo
-            vuetify-logo
-        v-card
-            v-card-title(class="headline")
-                | {{ user1.name }}
-            v-card-text
-                | TEST
-                .text-xs-right
-                    | <em><small>&mdash; John Leider</small></em>
-                hr.my-3
-                a(
-                    href="https://nuxtjs.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                )
-                    | Nuxt Documentation
-                br
-                a(
-                    href="https://github.com/nuxt/nuxt.js"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                )
-                    | Nuxt GitHub
-            v-card-actions
-                v-spacer
-                v-btn(
-                    color="primary"
-                    nuxt
-                    to="/inspire"
-                )
-                    | Ssss
+        
 </template>
 
 <script lang="ts">

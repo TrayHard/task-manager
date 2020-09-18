@@ -1,4 +1,4 @@
-# nuxt-ts-boilerplate
+# task-manager
 
 ## Build Setup
 
