@@ -38,6 +38,22 @@ class TaskState {
             memory: 0.001,
             execTime: 43003
         },
+        {
+            id: 6523,
+            path: '/home/scripts/script8.sh',
+            priority: 5,
+            cpu: 3,
+            memory: 0.5,
+            execTime: 150
+        },
+        {
+            id: 383,
+            path: '/home/scripts/script9.sh',
+            priority: 3,
+            cpu: 1,
+            memory: 0.001,
+            execTime: 43003
+        },
     ];
 }
 

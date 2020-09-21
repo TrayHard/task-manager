@@ -6,15 +6,15 @@ v-layout(
 )
   v-container(fluid)
     v-row
-      v-col(cols='12')
-        v-row.grey.lighten-5(justify align='center')
+      v-col(cols="12")
+        v-row.grey.lighten-5.pa-12(justify="center" align="center")
           v-data-iterator(:items='tasks' :items-per-page.sync='itemsPerPage' hide-default-footer)
             template(v-slot:header)
-              v-toolbar.mb-2(color='indigo darken-5' dark flat)
-                v-toolbar-title This is a header
+              v-toolbar.mb-2(color="indigo darken-5" dark flat)
+                v-toolbar-title Task Manager
             template(v-slot:default='props')
               v-row
-                v-col(v-for="task in props.items" :key='`task${task.id}`' cols='12' sm='6' md='4' lg='3')
+                v-col(v-for="task in props.items" :key='`task${task.id}`' cols="12" sm="6" md="4" lg="3")
                   Task(:taskData="task" #default="{ taskData }")
                     v-card
                       v-card-title.subheading.font-weight-bold {{ taskData.id }}
@@ -35,14 +35,6 @@ v-layout(
                         v-list-item
                           v-list-item-content ExecTime:
                           v-list-item-content.align-end {{ taskData.execTime }}
-            template(v-slot:footer)
-              v-toolbar.mt-2(color='indigo' dark flat)
-                v-toolbar-title.subheading This is a footer
-
-                        
-                        //-     v-card.ma-3.pa-6(outlined tile)
-                        //-         | {{ taskData }}
-
 </template>
 
 <script lang="ts">
@@ -55,6 +47,14 @@ export default {
     Task,
   },
 
+  data(): {
+    itemsPerPage: number
+    } {
+    return {
+      itemsPerPage: 100,
+    };
+  },
+
   computed: {
     ...taskMapper.mapState(['tasks'])
   },
@@ -63,12 +63,5 @@ export default {
     const taskStore = task.context(store);
     taskStore.dispatch('getTasks');
   },
-
-  data() {
-    return {
-      itemsPerPage: 4,
-
-    }
-  },
-}
+};
 </script>
