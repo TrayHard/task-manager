@@ -1,11 +1,11 @@
 import { Module, createStore } from 'vuex-smart-module';
 import { auth } from './auth';
-import { counter } from './counter';
+import { task } from './tasks';
 
 const root = new Module({
     modules: {
         auth,
-        counter,
+        task,
     }
 });
 
