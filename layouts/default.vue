@@ -4,7 +4,7 @@
             v-container
                 nuxt
         v-footer(absolute app)
-            v-row(:align="center" justify="center")
+            v-row(align="center" justify="center")
                 .footer-text {{ footerText }}
 </template>
 
