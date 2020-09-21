@@ -1,6 +1,6 @@
 <template lang="pug">
     .task
-        slot(:taskdata="taskdata")
+        slot(:taskData="taskData")
 </template>
 
 <script lang="ts">
@@ -9,7 +9,7 @@ import { Task } from '@/types';
 
 export default {
     props: {
-        taskdata: {
+        taskData: {
             type: Object as PropType<Task>,
             default: () => {}
         },

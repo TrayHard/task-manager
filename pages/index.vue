@@ -1,49 +1,74 @@
 <template lang="pug">
 v-layout(
-    column
-    justify-center
-    align-center
+  column
+  justify-center
+  align-center
 )
-    v-container(fluid)
-        v-row
-            v-col(cols='12')
-                v-row.grey.lighten-5(style='height: 300px;' justify align='center')
-                    Task(:taskdata="task1" #default="taskdata")
-                        v-card.ma-3.pa-6(outlined tile)
-                            | {{ taskdata }}
-                        //- (v-for='n in 3' :key='n')
+  v-container(fluid)
+    v-row
+      v-col(cols='12')
+        v-row.grey.lighten-5(justify align='center')
+          v-data-iterator(:items='tasks' :items-per-page.sync='itemsPerPage' hide-default-footer)
+            template(v-slot:header)
+              v-toolbar.mb-2(color='indigo darken-5' dark flat)
+                v-toolbar-title This is a header
+            template(v-slot:default='props')
+              v-row
+                v-col(v-for="task in props.items" :key='`task${task.id}`' cols='12' sm='6' md='4' lg='3')
+                  Task(:taskData="task" #default="{ taskData }")
+                    v-card
+                      v-card-title.subheading.font-weight-bold {{ taskData.id }}
+                      v-divider
+                      v-list(dense)
+                        v-list-item
+                          v-list-item-content Path:
+                          v-list-item-content.align-end {{ taskData.path }}
+                        v-list-item
+                          v-list-item-content Priority:
+                          v-list-item-content.align-end {{ taskData.priority }}
+                        v-list-item
+                          v-list-item-content CPU:
+                          v-list-item-content.align-end {{ taskData.cpu }}
+                        v-list-item
+                          v-list-item-content RAM:
+                          v-list-item-content.align-end {{ taskData.memory }}
+                        v-list-item
+                          v-list-item-content ExecTime:
+                          v-list-item-content.align-end {{ taskData.execTime }}
+            template(v-slot:footer)
+              v-toolbar.mt-2(color='indigo' dark flat)
+                v-toolbar-title.subheading This is a footer
+
+                        
+                        //-     v-card.ma-3.pa-6(outlined tile)
+                        //-         | {{ taskData }}
 
 </template>
 
 <script lang="ts">
 import Task from '@/components/task.vue';
-import { auth, authMapper } from '../store/auth';
+import { task, taskMapper } from '../store/tasks';
 import { store } from '../store';
 
 export default {
-    components: {
-        Task,
-    },
+  components: {
+    Task,
+  },
 
-    data() {
-        return {
-            task1: {
-                path: '/home/scripts/script5.sh',
-                priority: 10,
-                cpu: 75,
-                memory: 0.1,
-                execTime: 120
-            }
-        }
-    },
+  computed: {
+    ...taskMapper.mapState(['tasks'])
+  },
 
-    computed: {
-        ...authMapper.mapState(['isLoggedIn', 'user1'])
-    },
+  created() {
+    const taskStore = task.context(store);
+    taskStore.dispatch('getTasks');
+  },
 
-    mounted() {
-        const a = auth.context(store);
-        console.log(a.getters.loginStatus);
-    },
+  data() {
+    return {
+      itemsPerPage: 4,
+
+    }
+  },
 }
 </script>

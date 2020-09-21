@@ -5,7 +5,40 @@ import API from '@/api';
 import { Task } from '~/types';
 
 class TaskState {
-    tasks: Array<Task> = [];
+    tasks: Array<Task> = [
+        {
+            id: 203,
+            path: '/home/scripts/script4.sh',
+            priority: 10,
+            cpu: 75,
+            memory: 0.1,
+            execTime: 120
+        },
+        {
+            id: 24,
+            path: '/home/scripts/script5.sh',
+            priority: 5,
+            cpu: 4,
+            memory: 0.01,
+            execTime: 140
+        },
+        {
+            id: 653,
+            path: '/home/scripts/script6.sh',
+            priority: 5,
+            cpu: 3,
+            memory: 0.5,
+            execTime: 150
+        },
+        {
+            id: 83,
+            path: '/home/scripts/script7.sh',
+            priority: 3,
+            cpu: 1,
+            memory: 0.001,
+            execTime: 43003
+        },
+    ];
 }
 
 class TaskGetters extends Getters<TaskState> {
