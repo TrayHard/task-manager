@@ -8,8 +8,11 @@ const API = axios.create({
 });
 
 API.interceptors.response.use((response: AxiosResponse) => {
-    if (response.status !== 200) throw new Error(`${response.status} ${response.statusText}`);
-    else return response.data as any;
+    if (response.status !== 200) {
+        throw new Error(`${response.status} ${response.statusText}`);
+    } else {
+        return response.data as any;
+    }
 }, (error: Error) => {
     console.error(error.message);
     throw error;
