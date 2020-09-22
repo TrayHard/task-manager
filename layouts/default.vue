@@ -10,13 +10,13 @@
 
 <script lang="ts">
 export default {
-    data(): {
-        footerText: string;
-        } {
-        return {
-            footerText: 'made by CROC'
-        };
-    },
+  data(): {
+    footerText: string;
+    } {
+    return {
+      footerText: 'made by CROC'
+    };
+  },
 };
 </script>
 

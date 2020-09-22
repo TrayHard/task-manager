@@ -1,5 +1,5 @@
-export type Task = {
-    id?: number,
+export type ITask = {
+    id: number,
     path: string,
     priority: number,
     cpu: number,

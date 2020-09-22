@@ -15,6 +15,10 @@ export default {
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
   */
+  env: {
+    API_URL: 'http://localhost:3030/api',
+    MOCK_API: true
+  },
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
