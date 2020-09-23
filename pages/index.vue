@@ -41,10 +41,10 @@ v-layout(
                             v-list-item-content {{ phrases.cpu }}:
                             v-list-item-content.align-end {{ taskData.cpu }}
                           v-list-item
-                            v-list-item-content {{ phrases.ram }}:
+                            v-list-item-content {{ phrases.memory }}:
                             v-list-item-content.align-end {{ taskData.memory }}
                           v-list-item
-                            v-list-item-content {{ phrases.exectime }}:
+                            v-list-item-content {{ phrases.execTime }}:
                             v-list-item-content.align-end {{ taskData.execTime }}
   Notification(v-model="notification.isShown" :text="notification.msgs.options[notification.msgs.chosen]")
   Edit-Modal(
@@ -133,6 +133,7 @@ export default {
       this.getTasks();
     },
     onTaskEdited(status: boolean) {
+      console.log('onTaskEdited');
       this.notification.isShown = true;
       this.notification.msgs.chosen = status ? 'edited' : 'notedited';
       this.getTasks();

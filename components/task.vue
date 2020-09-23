@@ -35,8 +35,10 @@ export default {
       });
     },
     submitEditedTask(taskData: ITask) {
+      console.log('submitEditedTask');
       const taskStore = task.context(store);
       taskStore.dispatch('editTask', { taskID: this.taskData.id, taskData }).then((isEdited: boolean) => {
+        console.log('emit edited');
         this.$emit('edited', isEdited);
       }).catch((err: Error) => {
         this.$emit('edited', false);

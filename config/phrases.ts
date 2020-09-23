@@ -1,10 +1,11 @@
 export default {
   projectname: 'Task Manager',
   priority: 'Priority',
+  path: 'Path',
   cpu: 'CPU',
-  ram: 'RAM',
+  memory: 'RAM',
   pid: 'PID',
-  exectime: 'ExecTime',
+  execTime: 'ExecTime',
   editModalTitle: (taskID: number) => `Editing Task №${taskID}`,
   notification: {
     deleted: 'Task has been deleted succesfully!',

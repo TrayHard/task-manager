@@ -4,8 +4,29 @@
       v-card-title.headline {{ phrases.editModalTitle(data.id) }}
       v-card-text
         v-text-field(
+          :label="phrases.path"
+          solo
+          v-model="data.path"
+        )
+        v-text-field(
           :label="phrases.priority"
           solo
+          v-model="data.priority"
+        )
+        v-text-field(
+          :label="phrases.cpu"
+          solo
+          v-model="data.cpu"
+        )
+        v-text-field(
+          :label="phrases.memory"
+          solo
+          v-model="data.memory"
+        )
+        v-text-field(
+          :label="phrases.execTime"
+          solo
+          v-model="data.execTime"
         )
       v-card-actions
         v-spacer
@@ -59,6 +80,7 @@ export default {
       this.$emit('input', false);
     },
     edit() {
+      console.log('edit');
       this.closeModal();
       //@ts-ignore
       this.submit(this.data);
