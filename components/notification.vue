@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-snackbar(v-model="value")
+  v-snackbar(v-model="isShown" @input="event => $emit('input', event)")
     | {{ text }}
     template(v-slot:action="{ attrs }")
       v-btn(color="pink" text v-bind="attrs" @click="$emit('input', false)" icon)
@@ -9,12 +9,12 @@
 <script lang="ts">
 export default {
   model: {
-    prop: 'value',
+    prop: 'isShown',
     event: 'input'
   },
 
   props: {
-    value: {
+    isShown: {
       type: Boolean,
       default: false
     },

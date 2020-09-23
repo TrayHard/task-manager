@@ -46,12 +46,16 @@ v-layout(
                           v-list-item
                             v-list-item-content {{ phrases.execTime }}:
                             v-list-item-content.align-end {{ taskData.execTime }}
-  Notification(v-model="notification.isShown" :text="notification.msgs.options[notification.msgs.chosen]")
+  Notification(
+    v-model="notification.isShown"
+    :text="notification.msgs.options[notification.msgs.chosen]"
+    @input="notification.isShown = $event"
+  )
   Edit-Modal(
     v-model="editModal.isShown"
     :data="editModal.data"
     :submit="editModal.submit"
-    @input="editModal.isShown= $event"
+    @input="editModal.isShown = $event"
   )
 </template>
 
