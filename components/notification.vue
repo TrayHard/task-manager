@@ -1,9 +1,9 @@
 <template lang="pug">
-  v-snackbar
+  v-snackbar(v-model="value")
     | {{ text }}
     template(v-slot:action="{ attrs }")
-      v-btn(color="pink" text v-bind="attrs" @click="notification.isShown = false")
-        | Close
+      v-btn(color="pink" text v-bind="attrs" @click="value = false" icon)
+        v-icon mdi-close
 </template>
 
 <script lang="ts">

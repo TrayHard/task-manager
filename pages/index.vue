@@ -7,10 +7,10 @@ v-layout(
   v-container(fluid)
     v-row
       v-col(cols="12")
-        v-row.grey.lighten-5.pa-12(justify="center" align="center")
+        v-row.grey.lighten-3.pa-12(justify="center" align="center")
           v-data-iterator(:items="tasks" :items-per-page.sync="itemsPerPage" hide-default-footer)
             template(v-slot:header)
-              v-toolbar.px-4(color="indigo darken-5" dark flat)
+              v-toolbar.rounded-t-lg.px-4(color="indigo darken-5" dark flat)
                 v-toolbar-title {{ phrases.projectname }}
                 v-spacer
                 v-btn(icon @click="getTasks")
@@ -25,7 +25,7 @@ v-layout(
                           v-chip(color="teal" text-color="white" small label)
                             span {{ phrases.pid }}: {{ taskData.id }}
                           .task-manager__controls
-                            v-btn.mr-1(fab dark x-small color="info" @click="editTask(taskData.id, submitEditedTask)")
+                            v-btn.mr-1(fab dark x-small color="info" @click.stop="editTask(taskData, submitEditedTask)")
                               v-icon(dark) mdi-pencil
                             v-btn(fab dark x-small color="error" @click="deleteTask")
                               v-icon(dark) mdi-delete
@@ -46,26 +46,19 @@ v-layout(
                           v-list-item
                             v-list-item-content {{ phrases.exectime }}:
                             v-list-item-content.align-end {{ taskData.execTime }}
-  notification(v-model="notification.isShown" :text="notification.msgs.options[notification.msgs.chosen]")
-  //- v-dialog(v-model="editModal.isShown" max-width="290")
-  //-   v-card
-  //-     v-card-title.headline {{ phrases.editModalTitle(taskData.id) }}
-  //-     v-card-text
-  //-       v-text-field(
-  //-         :label="phrases.priority"
-  //-         solo
-  //-       )
-  //-     v-card-actions
-  //-       v-spacer
-  //-       v-btn(color='green darken-1' text @click='dialog = false')
-  //-         | Disagree
-  //-       v-btn(color='green darken-1' text @click='dialog = false')
-  //-         | Agree
+  Notification(v-model="notification.isShown" :text="notification.msgs.options[notification.msgs.chosen]")
+  Edit-Modal(
+    v-model="editModal.isShown"
+    :data="editModal.data"
+    :submit="editModal.submit"
+    @input="editModal.isShown= $event"
+  )
 </template>
 
 <script lang="ts">
 import Task from '@/components/task.vue';
-import notification from '@/components/notification.vue';
+import Notification from '@/components/notification.vue';
+import EditModal from '@/components/editModal.vue';
 import { task } from '../store/tasks';
 import { store } from '../store';
 import { ITask } from '~/types';
@@ -75,7 +68,7 @@ type NotificationMsgOptions = 'deleted' | 'notdeleted' | 'edited' | 'notedited';
 
 export default {
   components: {
-    Task, notification,
+    Task, Notification, EditModal
   },
 
   data(): {
@@ -144,9 +137,12 @@ export default {
       this.notification.msgs.chosen = status ? 'edited' : 'notedited';
       this.getTasks();
     },
-    editTask(id: number, submit: (taskData: ITask) => void) {
+    editTask(taskData: ITask, submit: (taskData: ITask) => void) {
+      console.log("editTask");
       this.editModal.isShown = true;
+      this.editModal.data = taskData;
       this.editModal.submit = submit;
+      console.log(this.editModal);
     }
   },
 };
